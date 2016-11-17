@@ -14,10 +14,12 @@
 >- Number of bill 1位数字
 >- Reference number 6位数字
 >- Filler 11位数字
+    
 >######XL, 3
 >- Region code 2位数字或字母
 >- Serial number 14位数字或字母
 >- Filler 18位数字或字母
+    
 >######Simpati, Kartu AS, Mentari, IM3, Esia, Smartfren, Axis
 >- Bill reference 16位数字或字母
 >- Filler 8位数字或字母
