@@ -39,4 +39,19 @@
 支付标记 1位数字或字母(0电表号 1客户编号)<br/>
 电表号 11位数字或字母<br/>
 客户编号 13位数字或字母<br/>
+#####机票<br/>
+支付ID(payment ID) 13位数字或字母<br/>
+#####火车票(PT. KAI)<br/>
+火车票(Ticket number) 13位数字或字母<br/>
+#####房产税等税收(PBB)<br/>
+Indicator(0004) 4位数字或字母<br/>
+NOP(Ticket number) 18位数字或字母<br/>
+Tahun SPT 4位数字或字母<br/>
+#####高速路费(Sriwijaya Air & BSD City)<br/>
+唯一码 20位数字或字母<br/>
+语言(0印尼 1英语) 1位数字<br/>
+#####虚拟账号<br/>
+虚拟账号 20位数字或字母<br/>
+#####WOM Finance<br/>
+虚拟账号= 78900 + customer number <br/>
 #账单查询返回
