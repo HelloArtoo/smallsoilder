@@ -1,3 +1,4 @@
+#手机充值请求
 #####供应商：Flexi Trendy, Simpati, Kartu As, XL, Mentari, IM3, Esia, 3, Smartfren, Axis
 1. 电话号码 13位的数字或者字母（左对齐，不足用空格填充）
 2. 充值金额 12位数字（非浮点型数据）
@@ -18,6 +19,7 @@
 >######Simpati, Kartu AS, Mentari, IM3, Esia, Smartfren, Axis
 >- Bill reference 16位数字或字母
 >- Filler 8位数字或字母
+
 #账单查询请求
 ####Telkom(PSTN, Speedy, Flexy Classy)<br/>
 电话号码 13位数字（左对齐，不足用空格填充）<br/>
