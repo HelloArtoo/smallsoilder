@@ -13,6 +13,7 @@ MC-Bill Verify Key是MC-Bill给商户生成的唯一的一个加密字符串。�
 >sKey生成方式（下面的key1就是sKey）:
 key0 = md5( tranID & ordered & status & domain & amount & currency ) 
 key1 = md5( paydate & $domain &key0 & appcode & vKey )
+    
 #商户接入
 ####交易流程
 >1. 商户付款页，显示的是MC-Bill 支付方式选择页面。MC-Bill Payment提供不同的支付方式。
@@ -46,6 +47,7 @@ key1 = md5( paydate & $domain &key0 & appcode & vKey )
 >>10. 支付时间 日期类型 YYYY-MM-DD HH:mm:ss
 >>11. channel 字符类型 
 >>12. 校验码 字母或者数字 用于校验请求是否合法
+    
 #商户交易查询
 交易查询由商户主动发起。注意：查询频率最低为每5分钟一次。MC-Bill 测试账号不支持此功能。
 ####使用单个transaction ID查询交易
