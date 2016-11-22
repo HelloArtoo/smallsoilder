@@ -4,6 +4,7 @@ MC-Bill Verify Key是MC-Bill给商户生成的唯一的一个加密字符串。�
 >1. 集成MC-Bill在线支付和商户。
 >2. 验证MC-Bill在线支付。
 >3. 检查MC-Bil生成的每一笔交易。
+    
 ####安全性检查vCode and sKey
 1. vCode (merchant to MC-Bill)
 >商户生成的加密字符串，用于校验商户支付页面的交易。同时也能校验支付请求的完整性。如果商户的配置页面勾选了“Enable Verify Payment”（启用校验支付）的话，每一次交易请求都必须传vCode。
@@ -16,11 +17,13 @@ key1 = md5( paydate & $domain &key0 & appcode & vKey )
     
 #商户接入
 ####交易流程
+    
 >1. 商户付款页，显示的是MC-Bill 支付方式选择页面。MC-Bill Payment提供不同的支付方式。
 >2. 用户输入借/贷记卡号跳转至银行页面。并等待完成支付。
 >3. 银行页面完成支付之后，通知MC-Bill。同时相应的发送支付通知给用户和商户。
 >4. 调用商户配置的回调URL。商户更新订单的相应的状态。
 ####在线交易API
+    
 接入地址 https://mcbill.mcpayment.co.id/pay/ MerchantID /< Parameters>
 >1. 前台回调POST/GET。后台回调POST（商户登录管理后台配置的后台回调地址）
 >2. 默认参数
@@ -50,6 +53,7 @@ key1 = md5( paydate & $domain &key0 & appcode & vKey )
     
 #商户交易查询
 交易查询由商户主动发起。注意：查询频率最低为每5分钟一次。MC-Bill 测试账号不支持此功能。
+    
 ####使用单个transaction ID查询交易
 使用MC-Bill生成的唯一的交易号查询。请求URLhttps://mcbill.mcpayment.co.id/query/q_by_tid。请求方式为POST/GET。
 >1. 请求参数：
@@ -66,6 +70,7 @@ key1 = md5( paydate & $domain &key0 & appcode & vKey )
 >>4. Amount 浮点型数据
 >>5. Domain(商户号) 字母或数字
 >>6. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
+    
 ####使用order ID查询交易(返回单个结果)
 使用MC-Bill生成的订单号查询。请求URL https://mcbill.mcpayment.co.id/query/q_by_oid。请求方式为POST/GET。
 >1. 请求参数：
@@ -83,6 +88,7 @@ key1 = md5( paydate & $domain &key0 & appcode & vKey )
 >>5. Domain(商户号) 字母或数字
 >>6. BillingName(交易时使用的名称) 字母或数字
 >>7. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
+    
 ####使用order ID查询交易(返回批量数据)
 使用MC-Bill生成的订单号查询。请求URL https://mcbill.mcpayment.co.id/query/q_by_oid_batch。请求方式为POST/GET。
 >1. 请求参数：
