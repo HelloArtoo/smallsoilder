@@ -3,17 +3,21 @@
 
 ####Verify Key
 MC-Bill Verify Key是MC-Bill给商户生成的唯一的一个加密字符串。用于保证每一次交易的安全。Verify Key的使用：
+
 1. 集成MC-Bill在线支付和商户。
 2. 验证MC-Bill在线支付。
 3. 检查MC-Bil生成的每一笔交易。
 
 ####安全性检查vCode and sKey
 1. vCode (merchant to MC-Bill)
-* 商户生成的加密字符串，用于校验商户支付页面的交易。同时也能校验支付请求的完整性。如果商户的配置页面勾选了“Enable Verify Payment”（启用校验支付）的话，每一次交易请求都必须传vCode。
-* vCode生成方式：vCode = md5( amount & merchantID & order number & verify key)
+
+> 商户生成的加密字符串，用于校验商户支付页面的交易。同时也能校验支付请求的完整性。如果商户的配置页面勾选了“Enable Verify Payment”（启用校验支付）的话，每一次交易请求都必须传vCode。
+> vCode生成方式：vCode = md5( amount & merchantID & order number & verify key)
+
 2. sKey (MC-Bill to merchant)
-* MC-Bill sKey是由MC-Bill定义的一个security key，用于防止（在商户的在线商店交易返回的）交易状态被第三方伪造。商户在修改订单状态的时候必须比较MC-Bill返回的sKey和商户自己计算出来的key是否一致。
-* sKey生成方式（下面的key1就是sKey）:key0 = md5( tranID & ordered & status & domain & amount & currency ) key1 = md5( paydate & $domain &key0 & appcode & vKey )
+
+> MC-Bill sKey是由MC-Bill定义的一个security key，用于防止（在商户的在线商店交易返回的）交易状态被第三方伪造。商户在修改订单状态的时候必须比较MC-Bill返回的sKey和商户自己计算出来的key是否一致。
+> sKey生成方式（下面的key1就是sKey）:key0 = md5( tranID & ordered & status & domain & amount & currency ) key1 = md5( paydate & $domain &key0 & appcode & vKey )
 
 #商户接入
 
