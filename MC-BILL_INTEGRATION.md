@@ -21,13 +21,13 @@ MC-Bill Verify Key是MC-Bill给商户生成的唯一的一个加密字符串。�
 
 #商户接入
 
-####交易流程
+###交易流程
 1. 商户付款页，显示的是MC-Bill 支付方式选择页面。MC-Bill Payment提供不同的支付方式。
 2. 用户输入借/贷记卡号跳转至银行页面。并等待完成支付。
 3. 银行页面完成支付之后，通知MC-Bill。同时相应的发送支付通知给用户和商户。
 4. 调用商户配置的回调URL。商户更新订单的相应的状态。
 
-####在线交易API
+###在线交易API
 接入地址 https://mcbill.mcpayment.co.id/pay/ MerchantID /< Parameters>
 * 前台回调POST/GET。后台回调POST（商户登录管理后台配置的后台回调地址）
 * 默认参数
@@ -61,58 +61,70 @@ MC-Bill Verify Key是MC-Bill给商户生成的唯一的一个加密字符串。�
 #商户交易查询
 交易查询由商户主动发起。注意：查询频率最低为每5分钟一次。MC-Bill 测试账号不支持此功能。
 
-####使用单个transaction ID查询交易
+###使用单个transaction ID查询交易
 使用MC-Bill生成的唯一的交易号查询。请求URLhttps://mcbill.mcpayment.co.id/query/q_by_tid。请求方式为POST/GET。
->1. 请求参数：
->>1. amount(交易金额) 浮点型数据 最小值1.01
->>2. txID(交易号) 整形 （MC-Bill unique Transaction ID）
->>3. domain(商户号)
->>4. type(返回数据类型) 0纯文本1by post
->>5. url(后台回调地址)
->>6. skey(加密串skey)
->2. 返回结果：
->>1. StatCode 2位数字 00Success 11Failure 22Pending
->>2. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
->>3. TranID(交易号) 数值 
->>4. Amount 浮点型数据
->>5. Domain(商户号) 字母或数字
->>6. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
 
-####使用order ID查询交易(返回单个结果)
+* 请求参数：
+
+>1. amount(交易金额) 浮点型数据 最小值1.01
+>2. txID(交易号) 整形 （MC-Bill unique Transaction ID）
+>3. domain(商户号)
+>4. type(返回数据类型) 0纯文本1by post
+>5. url(后台回调地址)
+>6. skey(加密串skey)
+
+* 返回结果：
+
+>1. StatCode 2位数字 00Success 11Failure 22Pending
+>2. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
+>3. TranID(交易号) 数值 
+>4. Amount 浮点型数据
+>5. Domain(商户号) 字母或数字
+>6. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
+
+###使用order ID查询交易(返回单个结果)
 使用MC-Bill生成的订单号查询。请求URL https://mcbill.mcpayment.co.id/query/q_by_oid。请求方式为POST/GET。
->1. 请求参数：
->>1. amount(交易金额) 浮点型数据 最小值1.01
->>2. oID(订单号号) 整形 （Order ID of latest transaction.）
->>3. domain(商户号)
->>4. type(返回数据类型) 0纯文本1by post
->>5. url(后台回调地址)
->>6. 加密串skey
->2. 返回结果：
->>1. StatCode 2位数字 00Success 11Failure 22Pending
->>2. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
->>3. OrderID(某次特定交易的的订单号) 数值  
->>4. Amount 浮点型数据
->>5. Domain(商户号) 字母或数字
->>6. BillingName(交易时使用的名称) 字母或数字
->>7. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
 
-####使用order ID查询交易(返回批量数据)
+* 请求参数：
+
+>1. amount(交易金额) 浮点型数据 最小值1.01
+>2. oID(订单号号) 整形 （Order ID of latest transaction.）
+>3. domain(商户号)
+>4. type(返回数据类型) 0纯文本1by post
+>5. url(后台回调地址)
+>6. 加密串skey
+
+* 返回结果：
+
+>1. StatCode 2位数字 00Success 11Failure 22Pending
+>2. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
+>3. OrderID(某次特定交易的的订单号) 数值  
+>4. Amount 浮点型数据
+>5. Domain(商户号) 字母或数字
+>6. BillingName(交易时使用的名称) 字母或数字
+>7. VrfKey 字母或者数字 md5(Amount &  MC-Bill Verify Key  & Domain & TranID & StatCode)
+
+###使用order ID查询交易(返回批量数据)
 使用MC-Bill生成的订单号查询。请求URL https://mcbill.mcpayment.co.id/query/q_by_oid_batch。请求方式为POST/GET。
->1. 请求参数：
->>1. oID订单号号 整形 （Order ID of latest transaction.）
->>2. domain(商户号)
->>3. type(返回数据类型) 0纯文本1by post
->>4. url(后台回调地址)
->>5. format(返回格式) 0纯文本使用|分割 1数组
->>6. 加密串skey
->2. 返回结果：
->>1. TranID(交易号) 数字 MC-Bill生成的唯一号
->>2. BillingDate YYYY-MM-DD 交易时间
->>3. StatCode 2位数字 00Success 11Failure 22Pending
->>4. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
->>5. OrderID(某次特定交易的的订单号) 数值  
->>6. Amount 浮点型数据
->>7. BillingName(交易时使用的名称) 字母或数字
+
+* 请求参数：
+
+>1. oID订单号号 整形 （Order ID of latest transaction.）
+>2. domain(商户号)
+>3. type(返回数据类型) 0纯文本1by post
+>4. url(后台回调地址)
+>5. format(返回格式) 0纯文本使用|分割 1数组
+>6. 加密串skey
+
+* 返回结果：
+
+>1. TranID(交易号) 数字 MC-Bill生成的唯一号
+>2. BillingDate YYYY-MM-DD 交易时间
+>3. StatCode 2位数字 00Success 11Failure 22Pending
+>4. StatName Word？Success (captured, settled, ReqCancel, ReqChargeback, authorized)
+>5. OrderID(某次特定交易的的订单号) 数值  
+>6. Amount 浮点型数据
+>7. BillingName(交易时使用的名称) 字母或数字
 
 
 
